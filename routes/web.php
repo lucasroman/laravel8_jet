@@ -13,9 +13,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * Display all tasks
+ */
 Route::get('/', function () {
-    return view('welcome');
-});
+
+    return "Your are in: <b>" . route('home') .
+        "</b><br>All tasks will be here.";
+
+})->name('home');
+
+/**
+ * Add a new task
+ */
+Route::post('/task', function(Request $request) {
+
+    return "You are in: <b>" . route('task') .
+        "</b><br>A new task will be here.";
+
+})->name('task');
+
+/**
+ * Delete an existing task
+ */
+Route::delete('/task/{id}', function($id) {
+
+    return "Your are in: <b>" . route('deleteTask') .
+        "</b><br>A task will be delete here.";
+
+})->name('deleteTask');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
