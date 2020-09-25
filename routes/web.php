@@ -17,11 +17,8 @@ use Illuminate\Support\Facades\Route;
  * Display all tasks
  */
 Route::get('/', function () {
-
-    return "Your are in: <b>" . route('home') .
-        "</b><br>All tasks will be here.";
-
-})->name('home');
+    return view('tasks');
+});
 
 /**
  * Add a new task
