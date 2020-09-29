@@ -29,6 +29,20 @@
                         </li>
                     </ul>
                 </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Current Tasks
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <label for="task" class="font-weight-bold">
+                                Task
+                            </label>
+                            
+                        </li>
+                    </ul>
+                </div>
             </div>
 
         </form>
