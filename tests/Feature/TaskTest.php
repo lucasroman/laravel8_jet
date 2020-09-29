@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class TaskTest extends TestCase
 {
+    use RefreshDatabase;
+
     // Home url return tasks view
     public function testRouteHomeShowTasksView()
     {
@@ -16,12 +18,22 @@ class TaskTest extends TestCase
         $response->assertViewIs('tasks');
     }
 
-    // Make a new task
-    public function testRouteCanPostANewTask()
+    // Empty task don't save on database
+    public function testRedirectTaskToFormAgainIfEmpty()
     {
-        $response = $this->post('/task');
+        $response = $this->post('/', ['name' => '']);
 
-        $response->assertOK();
+        $this->assertDatabaseCount('tasks', 0);
+
+        $response->assertRedirect('/');
+    }
+
+    // Tasks with test can be saved
+    public function testCanSaveTaskWithText()
+    {
+        $response = $this->post('/', ['name' => 'A sample task name', ]);
+
+        $this->assertDatabaseCount('tasks', 1);
     }
 
     // Delete a task

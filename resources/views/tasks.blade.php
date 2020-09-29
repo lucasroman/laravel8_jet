@@ -6,7 +6,7 @@
         {{-- @include('common.errors') --}}
 
         {{-- New Task form --}}
-        <form action="/task" method="post">
+        <form action="" method="post">
             @csrf
 
             {{-- Task name --}}
@@ -39,7 +39,7 @@
                             <label for="task" class="font-weight-bold">
                                 Task
                             </label>
-                            
+
                         </li>
                     </ul>
                 </div>

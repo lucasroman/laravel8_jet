@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,19 +17,22 @@ use Illuminate\Support\Facades\Route;
 /**
  * Display all tasks
  */
-Route::get('/', function () {
-    return view('tasks');
-});
+Route::view('/', 'tasks');
 
 /**
  * Add a new task
  */
-Route::post('/task', function(Request $request) {
+Route::post('/', function(Request $request) {
 
-    return "You are in: <b>" . route('task') .
-        "</b><br>A new task will be here.";
+    $validator = $request->validate(['name' => 'required|max:255',]);
+    // $validator = Validator::make($request->all(), [
+    //     'name' => 'required|max:255',
+    // ]);
 
-})->name('task');
+    if ($validator->fails()) {
+        return redirect('/');
+    }
+});
 
 /**
  * Delete an existing task
