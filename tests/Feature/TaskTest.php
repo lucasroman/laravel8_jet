@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -19,35 +20,35 @@ class TaskTest extends TestCase
     }
 
     // Empty task don't save on database
-    public function testRedirectTaskToFormAgainIfEmpty()
+    public function testShoulNotSaveEmptyTask()
     {
         $response = $this->post('/', ['name' => '']);
-
+        // Check that the empty task wasn't saved on database
         $this->assertDatabaseCount('tasks', 0);
-
+        // Check redirect again to task form
         $response->assertRedirect('/');
     }
 
-    // Tasks with test can be saved
-    public function testCanSaveTaskWithText()
+    // Tasks validated must be saved
+    public function testCanSaveTaskValidated()
     {
         $response = $this->post('/', ['name' => 'A sample task name', ]);
-
+        // Check that the task with text was saved on database
         $this->assertDatabaseCount('tasks', 1);
+
+        $response->assertRedirect('/');
     }
 
     // Delete a task
     public function testRouteCanDelete()
     {
-        $this->markTestSkipped(
-            "Require database verification I'll do it later."
-        );
-
         $this->withoutExceptionHandling();
 
-        $id = 1;
+        $task = new Task(['name' => 'Task to delete', ]);
 
-        $response = $this->delete('/task/{id}', [$id => 1]);
+        $task->save();
+
+        $response = $this->delete('/task/{id}', ['id' => $task->id]);
 
         $response->assertOK();
     }
