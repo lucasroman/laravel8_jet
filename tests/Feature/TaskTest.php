@@ -20,7 +20,7 @@ class TaskTest extends TestCase
     }
 
     // Empty task don't save on database
-    public function testShoulNotSaveEmptyTask()
+    public function testShouldNotSaveEmptyTask()
     {
         $response = $this->post('/', ['name' => '']);
         // Check that the empty task wasn't saved on database
@@ -39,6 +39,18 @@ class TaskTest extends TestCase
         $response->assertRedirect('/');
     }
 
+    // Show task list
+    public function testShouldSeeATaskList()
+    {
+        $task = new Task(['name' => 'A sample task.']);
+
+        $task->save();
+
+        $response = $this->get('/');
+
+        $response->assertSee('A sample task.');
+    }
+    
     // Delete a task
     public function testRouteCanDelete()
     {
@@ -55,13 +67,4 @@ class TaskTest extends TestCase
         $response->assertOK();
     }
 
-    // Show task list
-    public function testShouldSeeATaskList()
-    {
-        $task1 = new Task(['name' => 'A sample task.']);
-
-        $response = $this->get('/');
-
-        $response->assertSee('A sample task.');
-    }
 }
