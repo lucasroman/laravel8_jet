@@ -42,6 +42,8 @@ class TaskTest extends TestCase
     // Delete a task
     public function testRouteCanDelete()
     {
+        $this->markTestIncomplete('Require show task list first.');
+
         $this->withoutExceptionHandling();
 
         $task = new Task(['name' => 'Task to delete', ]);
@@ -51,5 +53,15 @@ class TaskTest extends TestCase
         $response = $this->delete('/task/{id}', ['id' => $task->id]);
 
         $response->assertOK();
+    }
+
+    // Show task list
+    public function testShouldSeeATaskList()
+    {
+        $task1 = new Task(['name' => 'A sample task.']);
+
+        $response = $this->get('/');
+
+        $response->assertSee('A sample task.');
     }
 }
