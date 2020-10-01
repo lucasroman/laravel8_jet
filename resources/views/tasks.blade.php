@@ -9,6 +9,17 @@
         <form action="" method="post">
             @csrf
 
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+
             {{-- Task name --}}
             <div class="form-group container">
                 <div class="card mt-4">
