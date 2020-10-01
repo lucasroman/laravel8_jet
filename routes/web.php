@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Route; // Only by default
 /**
  * Display all tasks
  */
-Route::view('/', 'tasks');
+Route::get('/', function() {
+    $tasks = Task::orderBy('created_at', 'asc')->get();
+    
+    return view('tasks', ['tasks' => $tasks, ]);
+});
 
 /**
  * Add a new task

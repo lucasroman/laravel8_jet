@@ -19,7 +19,6 @@
                 </div>
             @endif
 
-
             {{-- Task name --}}
             <div class="form-group container">
                 <div class="card mt-4">
@@ -41,21 +40,36 @@
                     </ul>
                 </div>
 
-                <div class="card mt-4">
-                    <div class="card-header">
-                        Current Tasks
+                @if ($tasks->isNotEmpty())
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            Current Tasks
+                        </div>
+
+                        <table class="table table-striped">
+                            <thead>
+                                <th>Task</th>
+                            </thead>
+
+                            <tbody>
+                                @foreach ($tasks as $task)
+                                    <tr>
+                                        <td>{{ $task->name }}</td>
+                                        <td>
+                                            <button type="button" class=
+                                                "btn btn-danger">
+                                                <i class="fas fa-trash-alt"></i>
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <label for="task" class="font-weight-bold">
-                                Task
-                            </label>
-
-                        </li>
-                    </ul>
-                </div>
+                @endif
             </div>
-
         </form>
     </div>
 @endsection
