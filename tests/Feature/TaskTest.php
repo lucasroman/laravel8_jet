@@ -50,21 +50,19 @@ class TaskTest extends TestCase
 
         $response->assertSee('A sample task.');
     }
-    
+
     // Delete a task
     public function testRouteCanDelete()
     {
-        $this->markTestIncomplete('Require show task list first.');
+        // $this->withoutExceptionHandling();
 
-        $this->withoutExceptionHandling();
+        $this->post('/', ['name' => 'A sample task name']);
 
-        $task = new Task(['name' => 'Task to delete', ]);
+        $task = Task::first();
 
-        $task->save();
+        $response = $this->delete('/task/'. $task->id);
 
-        $response = $this->delete('/task/{id}', ['id' => $task->id]);
-
-        $response->assertOK();
+        $this->assertDeleted('tasks', ['id' => $task->id]);
     }
 
 }
