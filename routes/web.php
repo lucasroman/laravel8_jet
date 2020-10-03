@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route; // Only by default
  */
 Route::get('/', function() {
     $tasks = Task::orderBy('created_at', 'asc')->get();
-    
+
     return view('tasks', ['tasks' => $tasks, ]);
 });
 
@@ -43,12 +43,15 @@ Route::post('/', function(Request $request) {
 /**
  * Delete an existing task
  */
-Route::delete('/task/{id}', function($id) {
+Route::delete('/task/{id}', function(Request $request) {
 
-    return "Your are in: <b>" . route('deleteTask') .
-        "</b><br>A task will be delete here.";
+    $task = Task::find($request->id);
 
-})->name('deleteTask');
+    $task->delete();
+
+    return redirect('/');
+
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
