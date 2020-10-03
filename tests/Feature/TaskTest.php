@@ -54,13 +54,11 @@ class TaskTest extends TestCase
     // Delete a task
     public function testRouteCanDelete()
     {
-        // $this->withoutExceptionHandling();
-
         $this->post('/', ['name' => 'A sample task name']);
 
         $task = Task::first();
 
-        $response = $this->delete('/task/'. $task->id);
+        $this->delete('/task/'. $task->id);
 
         $this->assertDeleted('tasks', ['id' => $task->id]);
     }
