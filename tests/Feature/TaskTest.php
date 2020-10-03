@@ -23,8 +23,8 @@ class TaskTest extends TestCase
     public function testShouldNotSaveEmptyTask()
     {
         $response = $this->post('/', ['name' => '']);
-        // Check that the empty task wasn't saved on database
-        $this->assertDatabaseCount('tasks', 0);
+        // Check error in name attribute
+        $response->assertSessionHasErrors('name');
         // Check redirect again to task form
         $response->assertRedirect('/');
     }
