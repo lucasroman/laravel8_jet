@@ -12,7 +12,7 @@ class TaskTest extends TestCase
     use RefreshDatabase;
 
     // Home url return tasks view
-    public function testRouteHomeShowTasksView()
+    public function testExistUrlThatShowInputTaskForm()
     {
         $response = $this->get('/');
 
@@ -20,7 +20,7 @@ class TaskTest extends TestCase
     }
 
     // Empty task don't save on database
-    public function testShouldNotSaveEmptyTask()
+    public function testTaskNameWillNotSavedIfThisIsEmpty()
     {
         $response = $this->post('/', ['name' => '']);
         // Check error in name attribute
@@ -29,8 +29,8 @@ class TaskTest extends TestCase
         $response->assertRedirect('/');
     }
 
-    // Tasks validated must be saved
-    public function testCanSaveTaskValidated()
+    // Tasks must be saved
+    public function testAValidTaskCanBeSaved()
     {
         $response = $this->post('/', ['name' => 'A sample task name', ]);
         // Check that the task with text was saved on database
@@ -40,7 +40,7 @@ class TaskTest extends TestCase
     }
 
     // Show task list
-    public function testShouldSeeATaskList()
+    public function testShowTaskListIfExistAtLeastOneTask()
     {
         $task = new Task(['name' => 'A sample task.']);
 
@@ -52,7 +52,7 @@ class TaskTest extends TestCase
     }
 
     // Delete a task
-    public function testRouteCanDelete()
+    public function testAExistingTaskCanBeDeleted()
     {
         $this->post('/', ['name' => 'A sample task name']);
 
