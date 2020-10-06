@@ -39,37 +39,43 @@
                         </li>
                     </ul>
                 </div>
-
-                @if ($tasks->isNotEmpty())
-                    <div class="card mt-4">
-                        <div class="card-header">
-                            Current Tasks
-                        </div>
-
-                        <table class="table table-striped">
-                            <thead>
-                                <th>Task</th>
-                            </thead>
-
-                            <tbody>
-                                @foreach ($tasks as $task)
-                                    <tr>
-                                        <td>{{ $task->name }}</td>
-                                        <td>
-                                            <button type="button" class=
-                                                "btn btn-danger">
-                                                <i class="fas fa-trash-alt"></i>
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-
-                    </div>
-                @endif
-            </div>
         </form>
+
+        @if ($tasks->isNotEmpty())
+            <div class="card mt-4">
+                <div class="card-header">
+                    Current Tasks
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <th>Task</th>
+                    </thead>
+
+                    <tbody>
+                        @foreach ($tasks as $task)
+                            <tr>
+                                <form action=
+                                    "{{route('task.delete', $task->id)}}"
+                                    method="post">
+                                    @csrf
+                                    @method("delete")
+
+                                    <td>{{ $task->name }}</td>
+                                    <td>
+                                        <button type="submit" class=
+                                            "btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </form>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
+        </div>
     </div>
 @endsection
