@@ -24,18 +24,7 @@ Route::get('/', [TaskController::class, 'index']);
 /**
  * Add a new task
  */
-Route::post('/', function(Request $request) {
-
-    $validator = $request->validate([
-        'name' => 'required|max:255',
-    ]);
-
-    $task = new Task();
-    $task->name = $request->name;
-    $task->save();
-
-    return redirect('/');
-});
+Route::post('/', [TaskController::class, 'store']);
 
 /**
  * Delete an existing task
