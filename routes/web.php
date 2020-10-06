@@ -2,6 +2,7 @@
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use App\Http\Controllers\TaskController; // Required by Task controller
 use Illuminate\Support\Facades\Route; // Only by default
 
 /*
@@ -18,11 +19,7 @@ use Illuminate\Support\Facades\Route; // Only by default
 /**
  * Display all tasks
  */
-Route::get('/', function() {
-    $tasks = Task::orderBy('created_at', 'asc')->get();
-
-    return view('tasks', ['tasks' => $tasks, ]);
-});
+Route::get('/', [TaskController::class, 'index']);
 
 /**
  * Add a new task
