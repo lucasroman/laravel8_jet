@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\Task;
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\TaskController; // Required by Task controller
 use Illuminate\Support\Facades\Route; // Only by default
 
@@ -16,26 +15,15 @@ use Illuminate\Support\Facades\Route; // Only by default
 |
 */
 
-/**
- * Display all tasks
- */
+// Show task form and tasks list
 Route::get('/', [TaskController::class, 'index']);
 
-/**
- * Add a new task
- */
+// Add a new task
 Route::post('/', [TaskController::class, 'store']);
 
-/**
- * Delete an existing task
- */
- Route::delete('/{task}', function(Task $task) {
-
-     $task->delete();
-
-     return redirect('/');
-
- })->name('task.delete');
+// Delete an existing task
+Route::delete('/{task}', [TaskController::class, 'destroy'])
+->name('task.delete');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
