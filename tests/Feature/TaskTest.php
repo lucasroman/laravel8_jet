@@ -58,7 +58,7 @@ class TaskTest extends TestCase
 
         $task = Task::first();
 
-        $this->delete('/task/'. $task->id);
+        $this->delete('/'. $task->id);
 
         $this->assertDeleted('tasks', ['id' => $task->id]);
     }

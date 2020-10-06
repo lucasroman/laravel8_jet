@@ -43,13 +43,13 @@ Route::post('/', function(Request $request) {
 /**
  * Delete an existing task
  */
- Route::delete('/task/{task}', function(Task $task) {
+ Route::delete('/{task}', function(Task $task) {
 
      $task->delete();
 
      return redirect('/');
 
- });
+ })->name('task.delete');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
