@@ -8,15 +8,18 @@ use Tests\TestCase;
 
 class BookReservationTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    /** @test */
+    public function aBookCanBeAddedToLibrary()
     {
-        $response = $this->get('/');
+        $this->withoutExceptionHandling();
 
-        $response->assertStatus(200);
+        $response = $this->post('/book', [
+            'title' => 'The Dark Tower',
+            'author' => 'Stephen King',
+        ]);
+
+        $response->assertOk();
+
+        $this->assertCount(1, Book::all());
     }
 }
