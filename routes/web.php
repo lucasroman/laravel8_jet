@@ -22,4 +22,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::post('/book', [BookController::class, 'store']);
+Route::post('/books', [BookController::class, 'store']);
