@@ -23,3 +23,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::post('/books', [BookController::class, 'store']);
+
+Route::patch('/books/{book}', [BookController::class, 'update']);
