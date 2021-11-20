@@ -1,7 +1,5 @@
 <?php
 
-
-use App\Http\Controllers\TaskController; // Required by Task controller
 use Illuminate\Support\Facades\Route; // Only by default
 
 /*
@@ -15,15 +13,10 @@ use Illuminate\Support\Facades\Route; // Only by default
 |
 */
 
-// Show task form and tasks list
-Route::get('/', [TaskController::class, 'index']);
-
-// Add a new task
-Route::post('/', [TaskController::class, 'store']);
-
-// Delete an existing task
-Route::delete('/{task}', [TaskController::class, 'destroy'])
-->name('task.delete');
+// Show post view
+Route::get('/', function(){
+    return 'post route';
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
