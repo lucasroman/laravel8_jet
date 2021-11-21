@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route; // Only by default
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,7 @@ use Illuminate\Support\Facades\Route; // Only by default
 */
 
 // Show post view
-Route::get('/', function(){
-    return 'post route';
-});
+Route::get('/', [PostController::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
