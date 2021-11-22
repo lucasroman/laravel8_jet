@@ -1,3 +1,7 @@
+/*module.exports = {
+    testRegex: 'resources/components/__test__/.*.test.js$'
+}*/
+
 module.exports = {
-    testRegex: 'resources/assets/js/test/.*.spec.js$'
-}
+    presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
+  };
