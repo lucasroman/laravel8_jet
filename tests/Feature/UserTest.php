@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -21,6 +22,16 @@ class UserTest extends TestCase
     }
 
     // 1. Check post url and view exist
-    // 2. It must exist a 'create post' link
-    
+    // 2. It must exist a 'create post' link in user's dashboard
+    public function testItShouldExistACreatePostButton()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+                         ->get('/dashboard');
+
+        $response->assertSee('Create Post');
+    }
+    // 3. It must exist a 'index post' list in the user's dashboard
+    // 4. Check relationship between User and Posts (one-to-many)    
 }
