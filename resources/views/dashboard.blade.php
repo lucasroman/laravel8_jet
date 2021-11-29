@@ -13,3 +13,5 @@
         </div>
     </div>
 </x-app-layout>
+
+<a href="/"><button type="button">Create Post</button></a>
