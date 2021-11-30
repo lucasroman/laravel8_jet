@@ -17,9 +17,6 @@ use App\Http\Controllers\PostController;
 // Welcome page
 Route::view('/', 'welcome');
 
-// Show post view
-Route::get('/post', [PostController::class, 'index']);
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -27,3 +24,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Show post view
+Route::get('/posts', [PostController::class, 'index']);
