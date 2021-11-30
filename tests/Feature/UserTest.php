@@ -32,6 +32,17 @@ class UserTest extends TestCase
 
         $response->assertSee('Create Post');
     }
+
     // 3. It must exist a 'index post' list in the user's dashboard
+    public function testShouldExisteAnIndexPostsButton()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)
+                         ->get('/dashboard');
+        
+        $response->assertSee('List Posts');
+    }
+
     // 4. Check relationship between User and Posts (one-to-many)    
 }
