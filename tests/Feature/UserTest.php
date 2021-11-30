@@ -22,7 +22,8 @@ class UserTest extends TestCase
     }
 
     // 1. Check post url and view exist
-    // 2. It must exist a 'create post' link in user's dashboard
+
+    // It must exist a 'create post' link in user's dashboard
     public function testItShouldExistACreatePostButton()
     {
         $user = User::factory()->create();
@@ -33,7 +34,7 @@ class UserTest extends TestCase
         $response->assertSee('Create Post');
     }
 
-    // 3. It must exist a 'index post' list in the user's dashboard
+    // It must exist a 'index post' list in the user's dashboard
     public function testShouldExisteAnIndexPostsButton()
     {
         $user = User::factory()->create();
@@ -44,5 +45,5 @@ class UserTest extends TestCase
         $response->assertSee('List Posts');
     }
 
-    // 4. Check relationship between User and Posts (one-to-many)    
+    // Check relationship between User and Posts (one-to-many)    
 }
