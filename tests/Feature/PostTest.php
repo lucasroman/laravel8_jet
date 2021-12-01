@@ -31,4 +31,14 @@ class PostTest extends TestCase
 
         $response->assertViewIs('posts.create');
     }
+
+    // It can create a post with valid data
+    public function testItShouldCreateAPostWithValidData()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user);
+
+        
+    }
 }

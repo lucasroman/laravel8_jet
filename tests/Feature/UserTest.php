@@ -9,24 +9,19 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
+    use RefreshDatabase;
 
-        $response->assertStatus(200);
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = User::make();
     }
 
     // It must exist a 'create post' link in user's dashboard
     public function testItShouldExistACreatePostButton()
     {
-        $user = User::factory()->create();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
                          ->get('/dashboard');
 
         $response->assertSee('Create Post');
@@ -35,9 +30,7 @@ class UserTest extends TestCase
     // It must exist a 'index post' list in the user's dashboard
     public function testShouldExisteAnIndexPostsButton()
     {
-        $user = User::factory()->create();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
                          ->get('/dashboard');
         
         $response->assertSee('List Posts');
