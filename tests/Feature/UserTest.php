@@ -21,8 +21,6 @@ class UserTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // 1. Check post url and view exist
-
     // It must exist a 'create post' link in user's dashboard
     public function testItShouldExistACreatePostButton()
     {
