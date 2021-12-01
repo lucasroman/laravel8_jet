@@ -30,3 +30,7 @@ Route::get('/posts', [PostController::class, 'index']);
 
 // Post create
 Route::view('/posts/create', 'posts.create')->name('posts.create');
+
+// Post store
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
