@@ -4,6 +4,7 @@ watch:
     - tests
     - app
     - resources
+    - routes
   fileMask: '*.php'
 notifications:
   passingTests: false
