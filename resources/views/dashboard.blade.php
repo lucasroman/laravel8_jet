@@ -14,5 +14,5 @@
     </div>
 </x-app-layout>
 
-<a href="/"><button type="button">Create Post</button></a>
+<a href="{{ route('posts.create') }}"><button type="button">Create Post</button></a>
 <a href=""><button type="button">List Posts</button></a>
