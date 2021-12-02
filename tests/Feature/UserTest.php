@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -36,5 +37,15 @@ class UserTest extends TestCase
         $response->assertSee('List Posts');
     }
 
-    // Check relationship between User and Posts (one-to-many)    
+    // Check relationship between User and Posts (one-to-many) 
+    public function testOneUserCanHaveManyPosts()
+    {
+        $post1 = Post::make([
+            'title' => 'Post test title',
+            'text' => 'Text for post example test',
+            'owner' => $this->user
+        ]);
+
+        $posts = $this->user->posts;
+    }   
 }
