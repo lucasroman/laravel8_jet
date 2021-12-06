@@ -2,21 +2,21 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase; // Too slow
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->user = User::make();
+        $this->user = User::factory()->create();
     }
 
     // It must exist a 'create post' link in user's dashboard
@@ -40,12 +40,10 @@ class UserTest extends TestCase
     // Check relationship between User and Posts (one-to-many) 
     public function testOneUserCanHaveManyPosts()
     {
-        $post1 = Post::make([
-            'title' => 'Post test title',
-            'text' => 'Text for post example test',
-            'owner' => $this->user
+        $post = Post::factory()->create([
+            'user_id' => $this->user->id,
         ]);
 
-        $posts = $this->user->posts;
+        $this->assertCount(1, $this->user->posts);
     }   
 }
