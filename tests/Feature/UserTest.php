@@ -4,14 +4,12 @@ namespace Tests\Feature;
 
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    // use RefreshDatabase; // Too slow
     use DatabaseTransactions;
 
     protected function setUp(): void
