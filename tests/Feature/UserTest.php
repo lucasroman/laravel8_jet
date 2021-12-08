@@ -5,11 +5,13 @@ namespace Tests\Feature;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UserTest extends TestCase
 {
+    // use RefreshDatabase; // Too slow but necessary to recreate database
     use DatabaseTransactions;
 
     protected function setUp(): void
@@ -40,10 +42,25 @@ class UserTest extends TestCase
     // Check relationship between User and Posts (one-to-many) 
     public function testOneUserCanHaveManyPosts()
     {
-        $post = Post::factory()->create([
+        // Posts table is empty
+        $this->assertDatabaseCount('posts', 0);
+
+        $post1 = Post::factory()->create([
             'user_id' => $this->user->id,
         ]);
 
-        $this->assertCount(1, $this->user->posts);
+        $post2 = Post::factory()->create([
+            'user_id' => $this->user->id,
+        ]);
+
+        // Posts table have two posts
+        $this->assertDatabaseCount('posts', 2);
+
+        // The posts belongs to one user
+        $this->assertCount(2, $this->user->posts);
+
+        // Exist at least one relationship between user and post
+        $this->assertDatabaseHas('posts', ['user_id' => $this->user->id]);
+
     }   
 }
