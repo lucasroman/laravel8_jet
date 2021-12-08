@@ -18,7 +18,10 @@ class UserTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::factory()->create();
+        // Require follow conventions to work sentence below
+        $this->user = User::factory()
+                            ->hasPosts(2)
+                            ->create();
     }
 
     // It must exist a 'create post' link in user's dashboard
@@ -42,17 +45,6 @@ class UserTest extends TestCase
     // Check relationship between User and Posts (one-to-many) 
     public function testOneUserCanHaveManyPosts()
     {
-        // Posts table is empty
-        $this->assertDatabaseCount('posts', 0);
-
-        $post1 = Post::factory()->create([
-            'user_id' => $this->user->id,
-        ]);
-
-        $post2 = Post::factory()->create([
-            'user_id' => $this->user->id,
-        ]);
-
         // Posts table have two posts
         $this->assertDatabaseCount('posts', 2);
 
