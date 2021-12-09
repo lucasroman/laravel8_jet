@@ -17,6 +17,8 @@
         
         <div id="todoComponent">Todo component here</div>
         
+        {{ $user->posts }}
+
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
